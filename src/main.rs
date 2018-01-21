@@ -2,7 +2,7 @@ mod hr {
     pub mod thirty_days {
         use std::io;
 
-        pub fn _day1() {
+        pub fn _day0() {
             let mut input_string = String::new();
 
             io::stdin().read_line(&mut input_string)
