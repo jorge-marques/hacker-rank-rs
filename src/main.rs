@@ -74,9 +74,24 @@ mod hr {
                 ret
             }
         }
+
+        pub fn _a_very_big_sum() {
+            let mut elements = String::new();
+
+            io::stdin().read_line(&mut elements).expect("Could not read from stdin");
+
+            let elements = elements
+                .trim()
+                .split(' ')
+                .map(|x| x.parse::<u64>().expect("Could not parse"));
+
+            let sum: u64 = elements.sum();
+
+            println!("{}", sum);
+        }
     }
 }
 
 fn main() {
-    hr::algorithms::_compare_the_triplets();
+    hr::algorithms::_a_very_big_sum();
 }
