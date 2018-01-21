@@ -1,0 +1,6 @@
+[package]
+name = "hacker-rank"
+version = "0.1.0"
+authors = ["Jorge Marques <mrques.jorge@gmail.com>"]
+
+[dependencies]
