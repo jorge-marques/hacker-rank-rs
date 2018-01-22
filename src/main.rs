@@ -121,9 +121,39 @@ mod hr {
                     .collect()
             }
         }
+
+        pub fn _plus_minus() {
+            let numbers = parse_input();
+            let mut counter = [0, 0, 0];
+
+            for n in &numbers {
+                if *n > 0 {
+                    counter[0] += 1;
+                } else if *n < 0 {
+                    counter[1] += 1;
+                } else {
+                    counter[2] += 1;
+                }
+            }
+
+            counter.iter().for_each(|x| {
+                println!("{}", *x as f32 / numbers.len() as f32);
+            });
+
+            fn parse_input() -> Vec<i32> {
+                let mut input = String::new();
+
+                io::stdin().read_line(&mut input)
+                    .expect("Could not read from stdin");
+
+                input.trim().split_whitespace()
+                    .map(|x| x.parse::<i32>().expect("Could not parse"))
+                    .collect()
+            }
+        }
     }
 }
 
 fn main() {
-    hr::algorithms::_diagonal_difference();
+    hr::algorithms::_plus_minus();
 }
