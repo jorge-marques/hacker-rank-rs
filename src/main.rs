@@ -151,9 +151,23 @@ mod hr {
                     .collect()
             }
         }
+
+        pub fn _staircase() {
+            let mut size = String::new();
+
+            io::stdin().read_line(&mut size)
+                .expect("Could not read from stdin");
+
+            let size: usize = size.trim().parse()
+                .expect("Could not parse");
+
+            for i in 0..size {
+                println!("{:>1$}", (0..(i + 1)).map(|_| "#").collect::<String>(), size);
+            }
+        }
     }
 }
 
 fn main() {
-    hr::algorithms::_plus_minus();
+    hr::algorithms::_staircase();
 }
