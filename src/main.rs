@@ -89,9 +89,41 @@ mod hr {
 
             println!("{}", sum);
         }
+
+        pub fn _diagonal_difference() {
+            let mut size = String::new();
+
+            io::stdin().read_line(&mut size)
+                .expect("Could not read from stdin");
+
+            let size: usize = size.trim().parse().expect("Could not parse");
+
+            let mut diff = 0;
+
+            for i in 0..size {
+                let row = read_row();
+
+                diff += row[i] - row[size - 1 - i];
+            }
+
+            let diff = diff.abs();
+
+            println!("{}", diff);
+
+            fn read_row() -> Vec<i32> {
+                let mut row = String::new();
+
+                io::stdin().read_line(&mut row)
+                    .expect("Could not read from stdin");
+
+                row.trim().split_whitespace()
+                    .map(|x| x.parse::<i32>().expect("Could not parse"))
+                    .collect()
+            }
+        }
     }
 }
 
 fn main() {
-    hr::algorithms::_a_very_big_sum();
+    hr::algorithms::_diagonal_difference();
 }
