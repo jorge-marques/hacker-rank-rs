@@ -50,6 +50,61 @@ mod hr {
                 println!("Not Weird");
             }
         }
+
+        pub fn _class_vs_instance() {
+            struct Person {
+                age: i32
+            };
+
+            impl Person {
+                fn new(initial_age: i32) -> Person {
+                    let mut age = initial_age;
+
+                    if age < 0 {
+                        println!("Age is not valid, setting age to 0.");
+                        age = 0;
+                    };
+
+                    return Person { age };
+                }
+
+                fn am_i_old(&self) {
+                    if self.age < 13 {
+                        println!("You are young.")
+                    } else if self.age >= 13 && self.age < 18 {
+                        println!("You are a teenager.")
+                    } else {
+                        println!("You are old.")
+                    }
+                }
+
+                fn year_passes(&mut self) {
+                    self.age += 1;
+                }
+            }
+
+            let t: i32 = read_line().trim().parse().unwrap();
+
+            for _ in 0..t {
+                let age = read_line().trim().parse().unwrap();
+                let mut p = Person::new(age);
+
+                p.am_i_old();
+
+                for _ in 0..3 {
+                    p.year_passes();
+                }
+
+                p.am_i_old();
+                println!();
+            }
+
+            fn read_line() -> String {
+                let mut input = String::new();
+                io::stdin().read_line(&mut input).expect("Could not read from stdin");
+                return input;
+            }
+        }
     }
 
     pub mod algorithms {
@@ -208,5 +263,5 @@ mod hr {
 }
 
 fn main() {
-    hr::thirty_days::_operators();
+    hr::thirty_days::_class_vs_instance();
 }
