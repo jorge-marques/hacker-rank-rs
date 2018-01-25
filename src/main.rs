@@ -32,6 +32,24 @@ mod hr {
 
             println!("The total meal cost is {} dollars.", total);
         }
+
+        pub fn _intro_to_conditional_statements() {
+            let mut input = String::new();
+
+            io::stdin().read_line(&mut input).expect("Could not read from stdin");
+
+            let n: u32 = input.trim().parse().expect("Could not parse");
+
+            if n % 2 != 0 {
+                println!("Weird");
+            } else if n >= 2 && n <= 5 {
+                println!("Not Weird");
+            } else if n >= 6 && n <= 20 {
+                println!("Weird");
+            } else {
+                println!("Not Weird");
+            }
+        }
     }
 
     pub mod algorithms {
