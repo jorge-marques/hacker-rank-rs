@@ -304,9 +304,34 @@ mod hr {
                 return input;
             }
         }
+
+        pub fn _birthday_cake_candles() {
+            let heights: Vec<u32> = read_line().trim().split_whitespace()
+                .map(|x| x.parse().unwrap())
+                .collect();
+
+            let result = heights.iter().fold((0, 0), |mut res, e| {
+                if *e > res.0 {
+                    res.0 = *e;
+                    res.1 = 1;
+                } else if *e == res.0 {
+                    res.1 += 1;
+                }
+
+                return res;
+            });
+
+            println!("{:?}", result.1);
+
+            fn read_line() -> String {
+                let mut input = String::new();
+                io::stdin().read_line(&mut input).expect("Could not read from stdin");
+                return input;
+            }
+        }
     }
 }
 
 fn main() {
-    hr::algorithms::_mini_max_sum();
+    hr::algorithms::_birthday_cake_candles();
 }
