@@ -2,7 +2,7 @@ mod hr {
     pub mod thirty_days {
         use std::io;
 
-        pub fn _day0() {
+        pub fn _hello_world() {
             let mut input_string = String::new();
 
             io::stdin().read_line(&mut input_string)
@@ -10,6 +10,27 @@ mod hr {
 
             println!("Hello World");
             println!("{}", input_string);
+        }
+
+        pub fn _operators() {
+            let mut cost = String::new();
+            let mut tip = String::new();
+            let mut tax = String::new();
+
+            io::stdin().read_line(&mut cost).expect("Could not read from stdin");
+            io::stdin().read_line(&mut tip).expect("Could not read from stdin");
+            io::stdin().read_line(&mut tax).expect("Could not read from stdin");
+
+            let cost: f32 = cost.trim().parse().expect("Could not parse");
+            let tip: f32 = tip.trim().parse().expect("Could not parse");
+            let tax: f32 = tax.trim().parse().expect("Could not parse");
+
+            let tip = cost * (tip / 100.0);
+            let tax = cost * (tax / 100.0);
+
+            let total = (cost + tip + tax).round();
+
+            println!("The total meal cost is {} dollars.", total);
         }
     }
 
@@ -169,5 +190,5 @@ mod hr {
 }
 
 fn main() {
-    hr::algorithms::_staircase();
+    hr::thirty_days::_operators();
 }
