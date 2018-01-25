@@ -329,9 +329,45 @@ mod hr {
                 return input;
             }
         }
+
+        pub fn _time_conversion() {
+            let time = read_line().trim().to_string();
+
+            let pm = &time[time.len() - 2..] == "PM";
+            let am = !pm;
+
+            let hours = &time[..2];
+            let tail = &time[2..time.len() - 2];
+
+            if hours == "12" && pm {
+                println!("12{}", tail);
+                return;
+            }
+
+            if hours == "12" && am {
+                println!("00{}", tail);
+                return;
+            }
+
+            if pm {
+                let to_24 = hours.parse::<u8>().unwrap() + 12;
+                println!("{:?}{}", to_24, tail);
+                return;
+            }
+
+            if am {
+                println!("{}", &time[..time.len() - 2]);
+            }
+
+            fn read_line() -> String {
+                let mut input = String::new();
+                io::stdin().read_line(&mut input).expect("Could not read from stdin");
+                return input;
+            }
+        }
     }
 }
 
 fn main() {
-    hr::algorithms::_birthday_cake_candles();
+    hr::algorithms::_time_conversion();
 }
