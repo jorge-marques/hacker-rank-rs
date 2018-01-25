@@ -273,9 +273,40 @@ mod hr {
                 println!("{:>1$}", (0..(i + 1)).map(|_| "#").collect::<String>(), size);
             }
         }
+
+        pub fn _mini_max_sum() {
+            let input: Vec<u64> = read_line().trim().split_whitespace()
+                .map(|x| x.parse().unwrap())
+                .collect();
+
+            let sum: u64 = input.iter().sum();
+
+            let mut min: u64 = sum - input.iter().next().unwrap();
+            let mut max: u64 = min;
+
+            for n in input.iter() {
+                let result = sum - n;
+
+                if result < min {
+                    min = result;
+                }
+
+                if result > max {
+                    max = result;
+                }
+            }
+
+            println!("{} {}", min, max);
+
+            fn read_line() -> String {
+                let mut input = String::new();
+                io::stdin().read_line(&mut input).expect("Could not read from stdin");
+                return input;
+            }
+        }
     }
 }
 
 fn main() {
-    hr::thirty_days::_loops();
+    hr::algorithms::_mini_max_sum();
 }
