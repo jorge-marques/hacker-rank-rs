@@ -122,252 +122,254 @@ mod hr {
     }
 
     pub mod algorithms {
-        use std::io;
+        pub mod warmup {
+            use std::io;
 
-        pub fn _simple_array_sum() {
-            let mut elements = String::new();
+            pub fn _simple_array_sum() {
+                let mut elements = String::new();
 
-            io::stdin().read_line(&mut elements).expect("Could not read from stdin");
+                io::stdin().read_line(&mut elements).expect("Could not read from stdin");
 
-            let elements = elements
-                .trim()
-                .split(' ')
-                .map(|x| x.parse::<isize>().expect("Could not parse"));
+                let elements = elements
+                    .trim()
+                    .split(' ')
+                    .map(|x| x.parse::<isize>().expect("Could not parse"));
 
-            let sum: isize = elements.sum();
+                let sum: isize = elements.sum();
 
-            println!("{}", sum);
-        }
+                println!("{}", sum);
+            }
 
-        pub fn _compare_the_triplets() {
-            let stdin = io::stdin();
+            pub fn _compare_the_triplets() {
+                let stdin = io::stdin();
 
-            let mut a = String::new();
-            let mut b = String::new();
+                let mut a = String::new();
+                let mut b = String::new();
 
-            stdin.read_line(&mut a).expect("Could not read from stdin");
-            stdin.read_line(&mut b).expect("Could not read from stdin");
+                stdin.read_line(&mut a).expect("Could not read from stdin");
+                stdin.read_line(&mut b).expect("Could not read from stdin");
 
-            struct Triplets { a: [i32; 3], b: [i32; 3] }
+                struct Triplets { a: [i32; 3], b: [i32; 3] }
 
-            let triplets = Triplets {
-                a: process_argument(&a),
-                b: process_argument(&b),
-            };
+                let triplets = Triplets {
+                    a: process_argument(&a),
+                    b: process_argument(&b),
+                };
 
-            struct Points { a: i32, b: i32 }
+                struct Points { a: i32, b: i32 }
 
-            let mut points = Points { a: 0, b: 0 };
+                let mut points = Points { a: 0, b: 0 };
 
-            for n in 0..3 {
-                let a = triplets.a[n];
-                let b = triplets.b[n];
+                for n in 0..3 {
+                    let a = triplets.a[n];
+                    let b = triplets.b[n];
 
-                if a > b {
-                    points.a += 1;
-                } else if a < b {
-                    points.b += 1;
+                    if a > b {
+                        points.a += 1;
+                    } else if a < b {
+                        points.b += 1;
+                    }
+                }
+
+                println!("{} {}", points.a, points.b);
+
+                fn process_argument(arg: &String) -> [i32; 3] {
+                    let mut ret = [0, 0, 0];
+
+                    for (i, e) in arg.trim().split(' ').enumerate() {
+                        ret[i] = e.parse::<i32>().expect("Could not parse")
+                    }
+
+                    ret
                 }
             }
 
-            println!("{} {}", points.a, points.b);
+            pub fn _a_very_big_sum() {
+                let mut elements = String::new();
 
-            fn process_argument(arg: &String) -> [i32; 3] {
-                let mut ret = [0, 0, 0];
+                io::stdin().read_line(&mut elements).expect("Could not read from stdin");
 
-                for (i, e) in arg.trim().split(' ').enumerate() {
-                    ret[i] = e.parse::<i32>().expect("Could not parse")
-                }
+                let elements = elements
+                    .trim()
+                    .split(' ')
+                    .map(|x| x.parse::<u64>().expect("Could not parse"));
 
-                ret
-            }
-        }
+                let sum: u64 = elements.sum();
 
-        pub fn _a_very_big_sum() {
-            let mut elements = String::new();
-
-            io::stdin().read_line(&mut elements).expect("Could not read from stdin");
-
-            let elements = elements
-                .trim()
-                .split(' ')
-                .map(|x| x.parse::<u64>().expect("Could not parse"));
-
-            let sum: u64 = elements.sum();
-
-            println!("{}", sum);
-        }
-
-        pub fn _diagonal_difference() {
-            let mut size = String::new();
-
-            io::stdin().read_line(&mut size)
-                .expect("Could not read from stdin");
-
-            let size: usize = size.trim().parse().expect("Could not parse");
-
-            let mut diff = 0;
-
-            for i in 0..size {
-                let row = read_row();
-
-                diff += row[i] - row[size - 1 - i];
+                println!("{}", sum);
             }
 
-            let diff = diff.abs();
+            pub fn _diagonal_difference() {
+                let mut size = String::new();
 
-            println!("{}", diff);
-
-            fn read_row() -> Vec<i32> {
-                let mut row = String::new();
-
-                io::stdin().read_line(&mut row)
+                io::stdin().read_line(&mut size)
                     .expect("Could not read from stdin");
 
-                row.trim().split_whitespace()
-                    .map(|x| x.parse::<i32>().expect("Could not parse"))
-                    .collect()
-            }
-        }
+                let size: usize = size.trim().parse().expect("Could not parse");
 
-        pub fn _plus_minus() {
-            let numbers = parse_input();
-            let mut counter = [0, 0, 0];
+                let mut diff = 0;
 
-            for n in &numbers {
-                if *n > 0 {
-                    counter[0] += 1;
-                } else if *n < 0 {
-                    counter[1] += 1;
-                } else {
-                    counter[2] += 1;
+                for i in 0..size {
+                    let row = read_row();
+
+                    diff += row[i] - row[size - 1 - i];
+                }
+
+                let diff = diff.abs();
+
+                println!("{}", diff);
+
+                fn read_row() -> Vec<i32> {
+                    let mut row = String::new();
+
+                    io::stdin().read_line(&mut row)
+                        .expect("Could not read from stdin");
+
+                    row.trim().split_whitespace()
+                        .map(|x| x.parse::<i32>().expect("Could not parse"))
+                        .collect()
                 }
             }
 
-            counter.iter().for_each(|x| {
-                println!("{}", *x as f32 / numbers.len() as f32);
-            });
+            pub fn _plus_minus() {
+                let numbers = parse_input();
+                let mut counter = [0, 0, 0];
 
-            fn parse_input() -> Vec<i32> {
-                let mut input = String::new();
+                for n in &numbers {
+                    if *n > 0 {
+                        counter[0] += 1;
+                    } else if *n < 0 {
+                        counter[1] += 1;
+                    } else {
+                        counter[2] += 1;
+                    }
+                }
 
-                io::stdin().read_line(&mut input)
+                counter.iter().for_each(|x| {
+                    println!("{}", *x as f32 / numbers.len() as f32);
+                });
+
+                fn parse_input() -> Vec<i32> {
+                    let mut input = String::new();
+
+                    io::stdin().read_line(&mut input)
+                        .expect("Could not read from stdin");
+
+                    input.trim().split_whitespace()
+                        .map(|x| x.parse::<i32>().expect("Could not parse"))
+                        .collect()
+                }
+            }
+
+            pub fn _staircase() {
+                let mut size = String::new();
+
+                io::stdin().read_line(&mut size)
                     .expect("Could not read from stdin");
 
-                input.trim().split_whitespace()
-                    .map(|x| x.parse::<i32>().expect("Could not parse"))
-                    .collect()
-            }
-        }
+                let size: usize = size.trim().parse()
+                    .expect("Could not parse");
 
-        pub fn _staircase() {
-            let mut size = String::new();
-
-            io::stdin().read_line(&mut size)
-                .expect("Could not read from stdin");
-
-            let size: usize = size.trim().parse()
-                .expect("Could not parse");
-
-            for i in 0..size {
-                println!("{:>1$}", (0..(i + 1)).map(|_| "#").collect::<String>(), size);
-            }
-        }
-
-        pub fn _mini_max_sum() {
-            let input: Vec<u64> = read_line().trim().split_whitespace()
-                .map(|x| x.parse().unwrap())
-                .collect();
-
-            let sum: u64 = input.iter().sum();
-
-            let mut min: u64 = sum - input.iter().next().unwrap();
-            let mut max: u64 = min;
-
-            for n in input.iter() {
-                let result = sum - n;
-
-                if result < min {
-                    min = result;
-                }
-
-                if result > max {
-                    max = result;
+                for i in 0..size {
+                    println!("{:>1$}", (0..(i + 1)).map(|_| "#").collect::<String>(), size);
                 }
             }
 
-            println!("{} {}", min, max);
+            pub fn _mini_max_sum() {
+                let input: Vec<u64> = read_line().trim().split_whitespace()
+                    .map(|x| x.parse().unwrap())
+                    .collect();
 
-            fn read_line() -> String {
-                let mut input = String::new();
-                io::stdin().read_line(&mut input).expect("Could not read from stdin");
-                return input;
-            }
-        }
+                let sum: u64 = input.iter().sum();
 
-        pub fn _birthday_cake_candles() {
-            let heights: Vec<u32> = read_line().trim().split_whitespace()
-                .map(|x| x.parse().unwrap())
-                .collect();
+                let mut min: u64 = sum - input.iter().next().unwrap();
+                let mut max: u64 = min;
 
-            let result = heights.iter().fold((0, 0), |mut res, e| {
-                if *e > res.0 {
-                    res.0 = *e;
-                    res.1 = 1;
-                } else if *e == res.0 {
-                    res.1 += 1;
+                for n in input.iter() {
+                    let result = sum - n;
+
+                    if result < min {
+                        min = result;
+                    }
+
+                    if result > max {
+                        max = result;
+                    }
                 }
 
-                return res;
-            });
+                println!("{} {}", min, max);
 
-            println!("{:?}", result.1);
-
-            fn read_line() -> String {
-                let mut input = String::new();
-                io::stdin().read_line(&mut input).expect("Could not read from stdin");
-                return input;
-            }
-        }
-
-        pub fn _time_conversion() {
-            let time = read_line().trim().to_string();
-
-            let pm = &time[time.len() - 2..] == "PM";
-            let am = !pm;
-
-            let hours = &time[..2];
-            let tail = &time[2..time.len() - 2];
-
-            if hours == "12" && pm {
-                println!("12{}", tail);
-                return;
+                fn read_line() -> String {
+                    let mut input = String::new();
+                    io::stdin().read_line(&mut input).expect("Could not read from stdin");
+                    return input;
+                }
             }
 
-            if hours == "12" && am {
-                println!("00{}", tail);
-                return;
+            pub fn _birthday_cake_candles() {
+                let heights: Vec<u32> = read_line().trim().split_whitespace()
+                    .map(|x| x.parse().unwrap())
+                    .collect();
+
+                let result = heights.iter().fold((0, 0), |mut res, e| {
+                    if *e > res.0 {
+                        res.0 = *e;
+                        res.1 = 1;
+                    } else if *e == res.0 {
+                        res.1 += 1;
+                    }
+
+                    return res;
+                });
+
+                println!("{:?}", result.1);
+
+                fn read_line() -> String {
+                    let mut input = String::new();
+                    io::stdin().read_line(&mut input).expect("Could not read from stdin");
+                    return input;
+                }
             }
 
-            if pm {
-                let to_24 = hours.parse::<u8>().unwrap() + 12;
-                println!("{:?}{}", to_24, tail);
-                return;
-            }
+            pub fn _time_conversion() {
+                let time = read_line().trim().to_string();
 
-            if am {
-                println!("{}", &time[..time.len() - 2]);
-            }
+                let pm = &time[time.len() - 2..] == "PM";
+                let am = !pm;
 
-            fn read_line() -> String {
-                let mut input = String::new();
-                io::stdin().read_line(&mut input).expect("Could not read from stdin");
-                return input;
+                let hours = &time[..2];
+                let tail = &time[2..time.len() - 2];
+
+                if hours == "12" && pm {
+                    println!("12{}", tail);
+                    return;
+                }
+
+                if hours == "12" && am {
+                    println!("00{}", tail);
+                    return;
+                }
+
+                if pm {
+                    let to_24 = hours.parse::<u8>().unwrap() + 12;
+                    println!("{:?}{}", to_24, tail);
+                    return;
+                }
+
+                if am {
+                    println!("{}", &time[..time.len() - 2]);
+                }
+
+                fn read_line() -> String {
+                    let mut input = String::new();
+                    io::stdin().read_line(&mut input).expect("Could not read from stdin");
+                    return input;
+                }
             }
         }
     }
 }
 
 fn main() {
-    hr::algorithms::_time_conversion();
+    hr::algorithms::warmup::_time_conversion();
 }
