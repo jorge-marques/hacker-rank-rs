@@ -105,6 +105,20 @@ mod hr {
                 return input;
             }
         }
+
+        pub fn _loops() {
+            let n: i32 = read_line().trim().parse().unwrap();
+
+            for i in 1..11 {
+                println!("{} x {} = {}", n, i, n * i);
+            }
+
+            fn read_line() -> String {
+                let mut input = String::new();
+                io::stdin().read_line(&mut input).expect("Could not read from stdin");
+                return input;
+            }
+        }
     }
 
     pub mod algorithms {
@@ -263,5 +277,5 @@ mod hr {
 }
 
 fn main() {
-    hr::thirty_days::_class_vs_instance();
+    hr::thirty_days::_loops();
 }
