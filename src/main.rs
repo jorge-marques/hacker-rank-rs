@@ -440,6 +440,22 @@ mod hr {
                 println!("{}", score.rob);
             }
 
+            pub fn _kangaroo() {
+                let input: Vec<i32> = _parse_args(&_read_line());
+
+                let p1 = input[0];
+                let v1 = input[1];
+                let p2 = input[2];
+                let v2 = input[3];
+
+                if v2 >= v1 || (p2 - p1) % (v1 - v2) > 0 {
+                    println!("NO");
+                    return;
+                }
+
+                println!("YES");
+            }
+
             use std::str::FromStr;
             use std::fmt::Debug;
 
@@ -467,5 +483,5 @@ mod hr {
 }
 
 fn main() {
-    hr::algorithms::implementation::_apple_and_orange();
+    hr::algorithms::implementation::_kangaroo();
 }
