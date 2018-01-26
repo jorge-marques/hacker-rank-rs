@@ -401,6 +401,62 @@ mod hr {
                 return from + of - (from % of);
             }
 
+            use std::cmp::max;
+
+            pub fn _apple_and_orange() {
+                let house: Vec<i32> = _parse_args(&_read_line());
+                let trees: Vec<i32> = _parse_args(&_read_line());
+                let apples: Vec<i32> = _parse_args(&_read_line());
+                let oranges: Vec<i32> = _parse_args(&_read_line());
+
+                struct Score { larry: i32, rob: i32 }
+                struct Position { larry: i32, rob: i32 }
+                struct HouseBoundaries { left: i32, right: i32 }
+
+                let position = Position { larry: trees[0], rob: trees[1] };
+                let boundaries = HouseBoundaries { left: house[0], right: house[1] };
+
+                let mut score = Score { larry: 0, rob: 0 };
+
+                for i in 0..max(apples.len(), oranges.len()) {
+                    if i < apples.len() {
+                        let position = position.larry + apples[i];
+
+                        if position >= boundaries.left && position <= boundaries.right {
+                            score.larry += 1;
+                        }
+                    }
+
+                    if i < oranges.len() {
+                        let position = position.rob + oranges[i];
+
+                        if position >= boundaries.left && position <= boundaries.right {
+                            score.rob += 1;
+                        }
+                    }
+                }
+
+                println!("{}", score.larry);
+                println!("{}", score.rob);
+            }
+
+            use std::str::FromStr;
+            use std::fmt::Debug;
+
+            fn _parse_arg<T>(arg: &str) -> T
+                where T: FromStr, <T as FromStr>::Err: Debug
+            {
+                arg.trim().parse().unwrap()
+            }
+
+            fn _parse_args<T>(args: &str) -> Vec<T>
+                where T: FromStr, <T as FromStr>::Err: Debug
+            {
+                args.trim().split_whitespace()
+                    .map(|x| x.parse().unwrap())
+                    .collect()
+            }
+
             fn _read_line() -> String {
                 let mut input = String::new();
                 io::stdin().read_line(&mut input).expect("Could not read from stdin");
@@ -411,5 +467,5 @@ mod hr {
 }
 
 fn main() {
-    hr::algorithms::implementation::_grading_students();
+    hr::algorithms::implementation::_apple_and_orange();
 }
