@@ -367,9 +367,49 @@ mod hr {
                 }
             }
         }
+
+        pub mod implementation {
+            use std::io;
+
+            pub fn _grading_students() {
+                let n: u32 = _read_line().trim().parse().unwrap();
+
+                let mut grades: Vec<u32> = vec![];
+
+                for _ in 0..n {
+                    grades.push(_read_line().trim().parse().unwrap());
+                }
+
+                for grade in grades {
+                    if grade < 38 {
+                        println!("{}", grade);
+                        continue;
+                    }
+
+                    let nearest = _next_multiple(5, grade);
+
+                    if nearest - grade < 3 {
+                        println!("{}", nearest);
+                        continue;
+                    }
+
+                    println!("{}", grade);
+                }
+            }
+
+            fn _next_multiple(of: u32, from: u32) -> u32 {
+                return from + of - (from % of);
+            }
+
+            fn _read_line() -> String {
+                let mut input = String::new();
+                io::stdin().read_line(&mut input).expect("Could not read from stdin");
+                return input;
+            }
+        }
     }
 }
 
 fn main() {
-    hr::algorithms::warmup::_time_conversion();
+    hr::algorithms::implementation::_grading_students();
 }
