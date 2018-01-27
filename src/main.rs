@@ -490,6 +490,28 @@ mod hr {
                 println!("{}", count);
             }
 
+            pub fn _breaking_the_records() {
+                let scores: Vec<u32> = _parse_args(&_read_line());
+
+                let mut min = scores[0];
+                let mut max = scores[0];
+                let mut breaks = (0, 0);
+
+                for i in 1..scores.len() {
+                    if scores[i] > max {
+                        max = scores[i];
+                        breaks.0 += 1;
+                    }
+
+                    if scores[i] < min {
+                        min = scores[i];
+                        breaks.1 += 1;
+                    }
+                }
+
+                println!("{} {}", breaks.0, breaks.1);
+            }
+
             use std::str::FromStr;
             use std::fmt::Debug;
 
@@ -517,5 +539,5 @@ mod hr {
 }
 
 fn main() {
-    hr::algorithms::implementation::_between_two_sets();
+    hr::algorithms::implementation::_breaking_the_records();
 }
