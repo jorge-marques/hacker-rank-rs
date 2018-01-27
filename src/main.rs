@@ -456,6 +456,40 @@ mod hr {
                 println!("YES");
             }
 
+            pub fn _between_two_sets() {
+                let a: Vec<i32> = _parse_args(&_read_line());
+                let b: Vec<i32> = _parse_args(&_read_line());
+
+                let a_max = a.iter().max().unwrap();
+                let b_min = b.iter().min().unwrap();
+
+                let between: Vec<_> = ((a_max + 1)..*b_min).collect();
+
+                let seq = a.iter()
+                    .chain(between.iter())
+                    .chain(b.iter());
+
+                let mut count = 0;
+
+                'outer: for j in seq {
+                    for i in &a {
+                        if j % i != 0 {
+                            continue 'outer;
+                        }
+                    }
+
+                    for i in &b {
+                        if i % j != 0 {
+                            continue 'outer;
+                        }
+                    }
+
+                    count += 1;
+                }
+
+                println!("{}", count);
+            }
+
             use std::str::FromStr;
             use std::fmt::Debug;
 
@@ -483,5 +517,5 @@ mod hr {
 }
 
 fn main() {
-    hr::algorithms::implementation::_kangaroo();
+    hr::algorithms::implementation::_between_two_sets();
 }
